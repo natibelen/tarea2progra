@@ -1,29 +1,42 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class PanelPrincipal extends JFrame {
     private PanelExpendedor exp;
     private PanelComprador com;
+    private Expendedor expende;
+
+    private Comprador persona;
     public PanelPrincipal() {
         exp = new PanelExpendedor();
         com = new PanelComprador();
+        expende= new Expendedor(5,800,400);
     }
+
     public void paint () {
-        com.paint();
+      /*  if(exp.getCual()==0) {
+            exp.paint();
+        }
+        cual=exp.getCual();
+        System.out.println(cual);
+        if(cual!=0){
+           com.paint();
+        }*/
+
         exp.paint();
-    }}
+        com.paint();
+        persona=new Comprador(com.getMoneda(),exp.getCual(),expende); // ESTA PARTE NO ME ESTA FUNCIONANDO porque se esta haciendo antes qq lo de paint
+    }
+}
 class PanelComprador extends JFrame{
-    private JButton boton1;
-    private JButton boton2;
-    private JButton boton3;
-    private JButton boton4;
+    private JButton boton1,boton2,boton3,boton4;
+    private JPanel panel1,panel2,panel3,panel4;
+    private JLabel label1,label2;
+    private Moneda m;
 
-    private JPanel panel1;
-    private JPanel panel2;
-    private JPanel panel3;
-    private JPanel panel4;
 
-    private JLabel label1;
 
     public PanelComprador(){
         setSize(600, 800);
@@ -32,6 +45,8 @@ class PanelComprador extends JFrame{
         setLayout(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Comprador");
+
+        m=null;
 
         panel1 = new JPanel();
         panel1.setBounds(130, 338, 70, 70);
@@ -49,10 +64,18 @@ class PanelComprador extends JFrame{
         panel4.setBounds(370, 338, 70, 70);
         panel4.setOpaque(false);
 
+        label2 = new JLabel("Esta es tu billetera...");
+        label2.setBounds(100, 250, 600, 20);
+        Font font2 = new Font("Helvica", Font.BOLD, 14);
+        label2.setFont(font2);
+
+
         label1 = new JLabel("Haz click sobre una moneda para pagar tu producto...");
-        label1.setBounds(100, 250, 600, 50);
+        label1.setBounds(100, 270, 600, 20);
         Font font = new Font("Helvica", Font.BOLD, 14);
         label1.setFont(font);
+
+
 
     }
 
@@ -109,30 +132,59 @@ class PanelComprador extends JFrame{
         add(panel3);
         add(panel4);
         add(label1);
+        add(label2);
+
+        boton1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                m = new Moneda100();
+                System.out.println(m.getValor());
+            }
+        });
+
+        boton2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                m = new Moneda500();
+                System.out.println(m.getValor());
+            }
+        });
+
+        boton3.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                m = new Moneda1000();
+                System.out.println(m.getValor());
+            }
+        });
+
+        boton4.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                m = new Moneda1500();
+                System.out.println(m.getValor());
+            }
+        });
+
+
         setVisible(true);
+    }
+
+    public Moneda getMoneda(){
+        return m;
     }
 }
 class PanelExpendedor extends JFrame {
-    private JPanel panel1;
-    private JPanel panel2;
+    private JPanel panel1, panel2, panel3, panel4, panel5;
+    private Botonredondo boton1, boton2, boton3, boton4, boton5;
+    private JLabel apretar1, apretar2, apretar3;
+    private int cual;
 
-    private JPanel panel3;
-    private JPanel panel4;
-
-    private JPanel panel5;
-    private Botonredondo boton1;
-    private Botonredondo boton2;
-    private Botonredondo boton3;
-    private Botonredondo boton4;
-    private Botonredondo boton5;
-
-    public PanelExpendedor(){
+    public PanelExpendedor() {
         setSize(800, 800);
-        setLocation(0,0);
+        setLocation(0, 0);
         setResizable(false);
         setLayout(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Expendedor");
+
+        cual=0;
 
         panel1 = new JPanel();
         panel1.setBounds(490, 285, 30, 35);
@@ -154,10 +206,6 @@ class PanelExpendedor extends JFrame {
         panel5.setBounds(528, 328, 30, 35);
         panel5.setOpaque(false);
 
-
-    }
-
-    public void paint() {
         ImageIcon imagenicon2 = new ImageIcon("C:/Users/user/Downloads/PROGRA2/tarea2progra/src/imagenes/maquina-expendedora.png");
         Image imagen2 = imagenicon2.getImage();
         Image nuevaimagen2 = imagen2.getScaledInstance(600, 650, Image.SCALE_SMOOTH);
@@ -165,7 +213,7 @@ class PanelExpendedor extends JFrame {
         principal2.setBounds(0, 0, 600, 650);
         setContentPane(principal2);
 
-        boton1= new Botonredondo("1");
+        boton1 = new Botonredondo("1");
         boton1.setBackground(new Color(128, 128, 128)); // Establecer el color del botón
         boton1.setPreferredSize(new Dimension(30, 30)); // Establecer el tamaño del botón
         panel1.add(boton1);
@@ -189,6 +237,23 @@ class PanelExpendedor extends JFrame {
         boton5.setBackground(new Color(128, 128, 128)); // Establecer el color del botón
         boton5.setPreferredSize(new Dimension(30, 30)); // Establecer el tamaño del botón
         panel5.add(boton5);
+
+        apretar1 = new JLabel("Haz click sobre un");
+        apretar1.setBounds(650, 250, 130, 20);
+        Font font = new Font("Helvica", Font.BOLD, 14);
+        apretar1.setFont(font);
+        apretar2 = new JLabel("boton para elegir");
+        apretar2.setBounds(650, 270, 130, 20);
+        Font font2 = new Font("Helvica", Font.BOLD, 14);
+        apretar2.setFont(font2);
+        apretar3 = new JLabel("el producto... ");
+        apretar3.setBounds(650, 290, 130, 20);
+        Font font3 = new Font("Helvica", Font.BOLD, 14);
+        apretar3.setFont(font3);
+
+    }
+
+    public void paint() {
 
         ImageIcon imagenicon3 = new ImageIcon("C:/Users/user/Downloads/PROGRA2/tarea2progra/src/imagenes/Imagen1.jpg");
         Image imagen3 = imagenicon3.getImage();
@@ -223,9 +288,61 @@ class PanelExpendedor extends JFrame {
         add(panel3);
         add(panel4);
         add(panel5);
+        add(apretar1);
+        add(apretar2);
+        add(apretar3);
+
+        boton1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                apretar1.setVisible(false); // Ocultar el mensaje
+                apretar2.setVisible(false);
+                apretar3.setVisible(false);
+                cual = 1;
+                System.out.println(cual);
+            }
+        });
+
+        boton2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                apretar1.setVisible(false); // Ocultar el mensaje
+                apretar2.setVisible(false);
+                apretar3.setVisible(false);
+                cual = 2;
+            }
+        });
+
+        boton3.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                apretar1.setVisible(false); // Ocultar el mensaje
+                apretar2.setVisible(false);
+                apretar3.setVisible(false);
+                cual = 3;
+            }
+        });
+
+        boton4.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                apretar1.setVisible(false); // Ocultar el mensaje
+                apretar2.setVisible(false);
+                apretar3.setVisible(false);
+                cual = 4;
+            }
+        });
+
+        boton5.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                apretar1.setVisible(false); // Ocultar el mensaje
+                apretar2.setVisible(false);
+                apretar3.setVisible(false);
+                cual = 5;
+            }
+        });
 
         setVisible(true);
 
-    }
 
+    }
+    public int getCual() {
+        return cual;
+    }
 }
