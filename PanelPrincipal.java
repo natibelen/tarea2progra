@@ -1,35 +1,118 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.Ellipse2D;
 
 public class PanelPrincipal extends JFrame {
     private PanelExpendedor exp;
     private PanelComprador com;
     public PanelPrincipal() {
-        setSize(800, 800);
+        exp = new PanelExpendedor();
+        com = new PanelComprador();
+    }
+    public void paint () {
+        com.paint();
+        exp.paint();
+    }}
+class PanelComprador extends JFrame{
+    private JButton boton1;
+    private JButton boton2;
+    private JButton boton3;
+    private JButton boton4;
+
+    private JPanel panel1;
+    private JPanel panel2;
+    private JPanel panel3;
+    private JPanel panel4;
+
+    private JLabel label1;
+
+    public PanelComprador(){
+        setSize(600, 800);
+        setLocation(790,0);
         setResizable(false);
         setLayout(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setTitle("Mi ventana");
+        setTitle("Comprador");
 
-        exp = new PanelExpendedor();
-        com = new PanelComprador();
-        this.setBackground(Color.white);
+        panel1 = new JPanel();
+        panel1.setBounds(130, 338, 70, 70);
+        panel1.setOpaque(false);
+
+        panel2 = new JPanel();
+        panel2.setBounds(210, 338, 70, 70);
+        panel2.setOpaque(false);
+
+        panel3 = new JPanel();
+        panel3.setBounds(290, 338, 70, 70);
+        panel3.setOpaque(false);
+
+        panel4 = new JPanel();
+        panel4.setBounds(370, 338, 70, 70);
+        panel4.setOpaque(false);
+
+        label1 = new JLabel("Haz click sobre una moneda para pagar tu producto...");
+        label1.setBounds(100, 250, 600, 50);
+        Font font = new Font("Helvica", Font.BOLD, 14);
+        label1.setFont(font);
 
     }
-    @Override
-    public void paint (Graphics g) {
-        super.paint(g);
-        com.paint(g);
-        exp.paint(g);
-    }}
-class PanelComprador extends JFrame{
 
-    public void paint(Graphics g) {
+    public void paint() {
+        ImageIcon imagenicon = new ImageIcon("C:/Users/user/Downloads/PROGRA2/tarea2progra/src/imagenes/barra.png");
+        Image imagen1 = imagenicon.getImage();
+        Image nuevaimagen = imagen1.getScaledInstance(370, 70, Image.SCALE_SMOOTH);
+        JLabel principal1 = new JLabel(new ImageIcon(nuevaimagen));
+        principal1.setBounds(0, 300, 370, 70);
+        setContentPane(principal1);
 
+        ImageIcon imagenboton1 = new ImageIcon("C:/Users/user/Downloads/PROGRA2/tarea2progra/src/imagenes/100.jpg");
+        Image imagenbot1 = imagenboton1.getImage();
+        Image nuevoboton1 = imagenbot1.getScaledInstance(70, 70, Image.SCALE_SMOOTH);
+        ImageIcon boton1escalado= new ImageIcon(nuevoboton1);
+
+        ImageIcon imagenboton2 = new ImageIcon("C:/Users/user/Downloads/PROGRA2/tarea2progra/src/imagenes/500.png");
+        Image imagenbot2 = imagenboton2.getImage();
+        Image nuevoboton2 = imagenbot2.getScaledInstance(70, 70, Image.SCALE_SMOOTH);
+        ImageIcon boton1escalado2= new ImageIcon(nuevoboton2);
+
+        ImageIcon imagenboton3 = new ImageIcon("C:/Users/user/Downloads/PROGRA2/tarea2progra/src/imagenes/1000.jpg");
+        Image imagenbot3 = imagenboton3.getImage();
+        Image nuevoboton3 = imagenbot3.getScaledInstance(70, 70, Image.SCALE_SMOOTH);
+        ImageIcon boton1escalado3= new ImageIcon(nuevoboton3);
+
+        ImageIcon imagenboton4 = new ImageIcon("C:/Users/user/Downloads/PROGRA2/tarea2progra/src/imagenes/1500.jpg");
+        Image imagenbot4 = imagenboton4.getImage();
+        Image nuevoboton4 = imagenbot4.getScaledInstance(70, 70, Image.SCALE_SMOOTH);
+        ImageIcon boton1escalado4= new ImageIcon(nuevoboton4);
+
+        boton1= new JButton();
+        boton1.setIcon(boton1escalado);
+        boton1.setPreferredSize(new Dimension(70, 70));
+        panel1.add(boton1);
+
+        boton2= new JButton();
+        boton2.setIcon(boton1escalado2);
+        boton2.setPreferredSize(new Dimension(70, 70));
+        panel2.add(boton2);
+
+        boton3= new JButton();
+        boton3.setIcon(boton1escalado3);
+        boton3.setPreferredSize(new Dimension(70, 70));
+        panel3.add(boton3);
+
+        boton4= new JButton();
+        boton4.setIcon(boton1escalado4);
+        boton4.setPreferredSize(new Dimension(70, 70));
+        panel4.add(boton4);
+
+        add(panel1);
+        add(panel2);
+        add(panel3);
+        add(panel4);
+        add(label1);
+        setVisible(true);
     }
 }
-class PanelExpendedor extends JFrame{
+class PanelExpendedor extends JFrame {
     private JPanel panel1;
     private JPanel panel2;
 
@@ -37,97 +120,103 @@ class PanelExpendedor extends JFrame{
     private JPanel panel4;
 
     private JPanel panel5;
-    private RoundButton button;
-    private RoundButton button2;
-    private RoundButton button3;
-    private RoundButton button4;
-    private RoundButton button5;
+    private RoundButton boton1;
+    private RoundButton boton2;
+    private RoundButton boton3;
+    private RoundButton boton4;
+    private RoundButton boton5;
 
     public PanelExpendedor(){
+        setSize(800, 800);
+        setLocation(0,0);
+        setResizable(false);
+        setLayout(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setTitle("Expendedor");
 
         panel1 = new JPanel();
         panel1.setBounds(490, 285, 30, 35);
-        panel1.setOpaque(false); // Hacer el panel transparente para que se muestre la imagen de fondo
+        panel1.setOpaque(false); //panel opaco
 
         panel2 = new JPanel();
         panel2.setBounds(528, 285, 30, 35);
-        panel2.setOpaque(false); // Hacer el panel transparente para que se muestre la imagen de fondo
+        panel2.setOpaque(false);
 
         panel3 = new JPanel();
         panel3.setBounds(566, 285, 30, 35);
-        panel3.setOpaque(false); // Hacer el panel transparente para que se muestre la imagen de fondo
+        panel3.setOpaque(false);
 
         panel4 = new JPanel();
         panel4.setBounds(490, 328, 30, 35);
-        panel4.setOpaque(false); // Hacer el panel transparente para que se muestre la imagen de fondo
+        panel4.setOpaque(false);
 
         panel5 = new JPanel();
         panel5.setBounds(528, 328, 30, 35);
-        panel5.setOpaque(false); // Hacer el panel transparente para que se muestre la imagen de fondo
+        panel5.setOpaque(false);
 
 
     }
 
-    public void paint(Graphics g) {
-        ImageIcon imageIcon = new ImageIcon("C:/Users/user/Downloads/PROGRA2/tarea2progra/src/imagenes/maquina-expendedora.png");
-        Image image = imageIcon.getImage();
-        Image newImage = image.getScaledInstance(600, 650, Image.SCALE_SMOOTH);
-        JLabel background = new JLabel(new ImageIcon(newImage));
-        background.setBounds(0, 0, 600, 650);
-        setContentPane(background);
+    public void paint() {
+        ImageIcon imagenicon2 = new ImageIcon("C:/Users/user/Downloads/PROGRA2/tarea2progra/src/imagenes/maquina-expendedora.png");
+        Image imagen2 = imagenicon2.getImage();
+        Image nuevaimagen2 = imagen2.getScaledInstance(600, 650, Image.SCALE_SMOOTH);
+        JLabel principal2 = new JLabel(new ImageIcon(nuevaimagen2));
+        principal2.setBounds(0, 0, 600, 650);
+        setContentPane(principal2);
 
-        button = new RoundButton("1");
-        button.setBackground(new Color(128, 128, 128)); // Establecer el color del botón
-        button.setPreferredSize(new Dimension(30, 30)); // Establecer el tamaño del botón
-        panel1.add(button);
+        boton1= new RoundButton("1");
+        boton1.setBackground(new Color(128, 128, 128)); // Establecer el color del botón
+        boton1.setPreferredSize(new Dimension(30, 30)); // Establecer el tamaño del botón
+        panel1.add(boton1);
 
-        button2 = new RoundButton("2");
-        button2.setBackground(new Color(128, 128, 128)); // Establecer el color del botón
-        button2.setPreferredSize(new Dimension(30, 30)); // Establecer el tamaño del botón
-        panel2.add(button2);
+        boton2 = new RoundButton("2");
+        boton2.setBackground(new Color(128, 128, 128)); // Establecer el color del botón
+        boton2.setPreferredSize(new Dimension(30, 30)); // Establecer el tamaño del botón
+        panel2.add(boton2);
 
-        button3 = new RoundButton("3");
-        button3.setBackground(new Color(128, 128, 128)); // Establecer el color del botón
-        button3.setPreferredSize(new Dimension(30, 30)); // Establecer el tamaño del botón
-        panel3.add(button3);
+        boton3 = new RoundButton("3");
+        boton3.setBackground(new Color(128, 128, 128)); // Establecer el color del botón
+        boton3.setPreferredSize(new Dimension(30, 30)); // Establecer el tamaño del botón
+        panel3.add(boton3);
 
-        button4 = new RoundButton("4");
-        button4.setBackground(new Color(128, 128, 128)); // Establecer el color del botón
-        button4.setPreferredSize(new Dimension(30, 30)); // Establecer el tamaño del botón
-        panel4.add(button4);
+        boton4 = new RoundButton("4");
+        boton4.setBackground(new Color(128, 128, 128)); // Establecer el color del botón
+        boton4.setPreferredSize(new Dimension(30, 30)); // Establecer el tamaño del botón
+        panel4.add(boton4);
 
-        button5 = new RoundButton("5");
-        button5.setBackground(new Color(128, 128, 128)); // Establecer el color del botón
-        button5.setPreferredSize(new Dimension(30, 30)); // Establecer el tamaño del botón
-        panel5.add(button5);
+        boton5 = new RoundButton("5");
+        boton5.setBackground(new Color(128, 128, 128)); // Establecer el color del botón
+        boton5.setPreferredSize(new Dimension(30, 30)); // Establecer el tamaño del botón
+        panel5.add(boton5);
 
-        ImageIcon imageIcon2 = new ImageIcon("C:/Users/user/Downloads/PROGRA2/tarea2progra/src/imagenes/Imagen1.jpg");
-        Image image2 = imageIcon2.getImage();
-        Image newImage2 = image2.getScaledInstance(30, 70, Image.SCALE_SMOOTH);
-        JLabel newLabel = new JLabel(new ImageIcon(newImage2));
-        newLabel.setBounds(215, 115, 30, 70);
-        add(newLabel);
+        ImageIcon imagenicon3 = new ImageIcon("C:/Users/user/Downloads/PROGRA2/tarea2progra/src/imagenes/Imagen1.jpg");
+        Image imagen3 = imagenicon3.getImage();
+        Image nuevaimagen3 = imagen3.getScaledInstance(30, 70, Image.SCALE_SMOOTH);
+        JLabel coca = new JLabel(new ImageIcon(nuevaimagen3));
+        coca.setBounds(215, 115, 30, 70);
+        add(coca);
 
-        ImageIcon imageIcon3 = new ImageIcon("C:/Users/user/Downloads/PROGRA2/tarea2progra/src/imagenes/sprite.png");
-        Image image3 = imageIcon3.getImage();
-        Image newImage3 = image3.getScaledInstance(25, 65, Image.SCALE_SMOOTH);
-        JLabel newLabel3 = new JLabel(new ImageIcon(newImage3));
-        newLabel3.setBounds(300, 115, 25, 65);
-        add(newLabel3);
+        ImageIcon imagenicon4 = new ImageIcon("C:/Users/user/Downloads/PROGRA2/tarea2progra/src/imagenes/sprite.png");
+        Image imagen4 = imagenicon4.getImage();
+        Image nuevaimagen4 = imagen4.getScaledInstance(25, 65, Image.SCALE_SMOOTH);
+        JLabel sprite = new JLabel(new ImageIcon(nuevaimagen4));
+        sprite.setBounds(300, 115, 25, 65);
+        add(sprite);
 
-        ImageIcon imageIcon4 = new ImageIcon("C:/Users/user/Downloads/PROGRA2/tarea2progra/src/imagenes/snicke2.png");
-        Image image4 = imageIcon4.getImage();
-        Image newImage4 = image4.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-        JLabel newLabel4 = new JLabel(new ImageIcon(newImage4));
-        newLabel4.setBounds(380, 120, 50, 50);
-        add(newLabel4);
+        ImageIcon imagenicon5 = new ImageIcon("C:/Users/user/Downloads/PROGRA2/tarea2progra/src/imagenes/snicke2.png");
+        Image imagen5 = imagenicon5.getImage();
+        Image nuevaimagen5 = imagen5.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+        JLabel snickers = new JLabel(new ImageIcon(nuevaimagen5));
+        snickers.setBounds(380, 120, 50, 50);
+        add(snickers);
 
-        ImageIcon imageIcon5 = new ImageIcon("C:/Users/user/Downloads/PROGRA2/tarea2progra/src/imagenes/super8.png");
-        Image image5 = imageIcon5.getImage();
-        Image newImage5 = image5.getScaledInstance(60, 60, Image.SCALE_SMOOTH);
-        JLabel newLabel5 = new JLabel(new ImageIcon(newImage5));
-        newLabel5.setBounds(205, 260, 60, 60);
-        add(newLabel5);
+        ImageIcon imagenicon6 = new ImageIcon("C:/Users/user/Downloads/PROGRA2/tarea2progra/src/imagenes/super8.png");
+        Image imagen6 = imagenicon6.getImage();
+        Image nuevaimagen6 = imagen6.getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+        JLabel super8 = new JLabel(new ImageIcon(nuevaimagen6));
+        super8.setBounds(205, 260, 60, 60);
+        add(super8);
 
         add(panel1);
         add(panel2);
@@ -137,42 +226,6 @@ class PanelExpendedor extends JFrame{
 
         setVisible(true);
 
-    }
-
-
-    public class RoundButton extends JButton {
-        public RoundButton(String text) {
-            super(text);
-            setBackground(new Color(255, 255, 255, 0)); // Hacer el fondo del botón transparente
-            setOpaque(false); // Hacer el botón transparente
-        }
-
-        @Override
-        protected void paintComponent(Graphics g) {
-            if (getModel().isArmed()) {
-                g.setColor(Color.lightGray);
-            } else {
-                g.setColor(getBackground());
-            }
-            g.fillOval(0, 0, getSize().width - 1, getSize().height - 1);
-            super.paintComponent(g);
-        }
-
-        @Override
-        protected void paintBorder(Graphics g) {
-            g.setColor(getForeground());
-            g.drawOval(0, 0, getSize().width - 1, getSize().height - 1);
-        }
-
-        @Override
-        public boolean contains(int x, int y) {
-            if (shape == null || !shape.getBounds().equals(getBounds())) {
-                shape = new Ellipse2D.Float(0, 0, getWidth(), getHeight());
-            }
-            return shape.contains(x, y);
-        }
-
-        private Shape shape;
     }
 
 }
