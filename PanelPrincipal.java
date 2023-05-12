@@ -120,11 +120,11 @@ class PanelExpendedor extends JFrame {
     private JPanel panel4;
 
     private JPanel panel5;
-    private RoundButton boton1;
-    private RoundButton boton2;
-    private RoundButton boton3;
-    private RoundButton boton4;
-    private RoundButton boton5;
+    private Botonredondo boton1;
+    private Botonredondo boton2;
+    private Botonredondo boton3;
+    private Botonredondo boton4;
+    private Botonredondo boton5;
 
     public PanelExpendedor(){
         setSize(800, 800);
@@ -165,27 +165,27 @@ class PanelExpendedor extends JFrame {
         principal2.setBounds(0, 0, 600, 650);
         setContentPane(principal2);
 
-        boton1= new RoundButton("1");
+        boton1= new Botonredondo("1");
         boton1.setBackground(new Color(128, 128, 128)); // Establecer el color del botón
         boton1.setPreferredSize(new Dimension(30, 30)); // Establecer el tamaño del botón
         panel1.add(boton1);
 
-        boton2 = new RoundButton("2");
+        boton2 = new Botonredondo("2");
         boton2.setBackground(new Color(128, 128, 128)); // Establecer el color del botón
         boton2.setPreferredSize(new Dimension(30, 30)); // Establecer el tamaño del botón
         panel2.add(boton2);
 
-        boton3 = new RoundButton("3");
+        boton3 = new Botonredondo("3");
         boton3.setBackground(new Color(128, 128, 128)); // Establecer el color del botón
         boton3.setPreferredSize(new Dimension(30, 30)); // Establecer el tamaño del botón
         panel3.add(boton3);
 
-        boton4 = new RoundButton("4");
+        boton4 = new Botonredondo("4");
         boton4.setBackground(new Color(128, 128, 128)); // Establecer el color del botón
         boton4.setPreferredSize(new Dimension(30, 30)); // Establecer el tamaño del botón
         panel4.add(boton4);
 
-        boton5 = new RoundButton("5");
+        boton5 = new Botonredondo("5");
         boton5.setBackground(new Color(128, 128, 128)); // Establecer el color del botón
         boton5.setPreferredSize(new Dimension(30, 30)); // Establecer el tamaño del botón
         panel5.add(boton5);
