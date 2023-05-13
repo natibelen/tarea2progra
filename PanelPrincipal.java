@@ -118,46 +118,44 @@ class PanelComprador extends JFrame{
         add(label2);
 
         if(m==null) {
-            boton1.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    m = new Moneda100();
-                    persona = new Comprador(m, PanelExpendedor.getCual(), expende);
-                    System.out.println(persona.queSacaste()+", "+persona.cuantoVuelto());
-                }
+            boton1.addActionListener(i -> {
+                m = new Moneda100();
+                persona = new Comprador(m, PanelExpendedor.getCual(), expende);
+                System.out.println(persona.queSacaste()+", "+persona.cuantoVuelto());
+                ImageIcon imagenboton21 = new ImageIcon("C:/Users/user/Downloads/PROGRA2/tarea2progra/src/imagenes/500.png");
+                Image imagenbot21 = imagenboton21.getImage();
+                Image nuevoboton21 = imagenbot21.getScaledInstance(70, 70, Image.SCALE_SMOOTH);
+                JLabel img = new JLabel(new ImageIcon(nuevoboton21));
+                img.setBounds(boton1.getBounds());
+                add(img);
+
             });
 
-            boton2.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    m = new Moneda500();
-                    persona = new Comprador(m, PanelExpendedor.getCual(), expende);
-                    System.out.println(persona.queSacaste()+", "+persona.cuantoVuelto());
-                }
+            boton2.addActionListener(i -> {
+                m = new Moneda500();
+                persona = new Comprador(m, PanelExpendedor.getCual(), expende);
+                System.out.println(persona.queSacaste()+", "+persona.cuantoVuelto());
             });
 
-            boton3.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    m = new Moneda1000();
-                    //System.out.println(m.getValor());
-                    persona = new Comprador(m, PanelExpendedor.getCual(), expende);
-                    System.out.println(persona.queSacaste()+", "+persona.cuantoVuelto());
-                }
+            boton3.addActionListener(i -> {
+                m = new Moneda1000();
+                //System.out.println(m.getValor());
+                persona = new Comprador(m, PanelExpendedor.getCual(), expende);
+                System.out.println(persona.queSacaste()+", "+persona.cuantoVuelto());
             });
 
-            boton4.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    m = new Moneda1500();
-                    persona = new Comprador(m, PanelExpendedor.getCual(), expende);
-                    System.out.println(persona.queSacaste()+", "+persona.cuantoVuelto());
-                }
+            boton4.addActionListener(i -> {
+                m = new Moneda1500();
+                persona = new Comprador(m, PanelExpendedor.getCual(), expende);
+                System.out.println(persona.queSacaste()+", "+persona.cuantoVuelto());
             });
+            //persona.getVuelto() el vuelto que hay que devolverle a persona
+            //persona.queSacaste()
+            //expende.getMoneda() --> hay que sacarle a la moneda q devuelve getmoneda el valor y iterar hasta que el valor sea igual al vuelto
         }
 
 
         setVisible(true);
-    }
-
-    public Moneda getMoneda(){
-        return m;
     }
 }
 class PanelExpendedor extends JFrame {
@@ -291,7 +289,6 @@ class PanelExpendedor extends JFrame {
                     apretar2.setVisible(false);
                     apretar3.setVisible(false);
                     cual = 1;
-                    System.out.println(cual);
                     panelcomprador.paint();
                 }
             });
