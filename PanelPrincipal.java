@@ -19,7 +19,6 @@ class PanelComprador extends JFrame{
     private JPanel panel1,panel2,panel3,panel4;
     private JLabel label1,label2;
     private Moneda m;
-
     public Expendedor expende;
     public Comprador persona;
 
@@ -118,31 +117,40 @@ class PanelComprador extends JFrame{
         add(label1);
         add(label2);
 
-        boton1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                m = new Moneda100();
-                persona= new Comprador(m,PanelExpendedor.getCual(),expende);
-            }
-        });
+        if(m==null) {
+            boton1.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    m = new Moneda100();
+                    persona = new Comprador(m, PanelExpendedor.getCual(), expende);
+                    System.out.println(persona.queSacaste()+", "+persona.cuantoVuelto());
+                }
+            });
 
-        boton2.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                m = new Moneda500();
-            }
-        });
+            boton2.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    m = new Moneda500();
+                    persona = new Comprador(m, PanelExpendedor.getCual(), expende);
+                    System.out.println(persona.queSacaste()+", "+persona.cuantoVuelto());
+                }
+            });
 
-        boton3.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                m = new Moneda1000();
-                System.out.println(m.getValor());
-            }
-        });
+            boton3.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    m = new Moneda1000();
+                    //System.out.println(m.getValor());
+                    persona = new Comprador(m, PanelExpendedor.getCual(), expende);
+                    System.out.println(persona.queSacaste()+", "+persona.cuantoVuelto());
+                }
+            });
 
-        boton4.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                m = new Moneda1500();
-            }
-        });
+            boton4.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    m = new Moneda1500();
+                    persona = new Comprador(m, PanelExpendedor.getCual(), expende);
+                    System.out.println(persona.queSacaste()+", "+persona.cuantoVuelto());
+                }
+            });
+        }
 
 
         setVisible(true);
