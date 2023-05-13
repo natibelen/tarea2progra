@@ -5,30 +5,14 @@ import java.awt.event.ActionListener;
 
 public class PanelPrincipal extends JFrame {
     private PanelExpendedor exp;
-    private PanelComprador com;
-    private Expendedor expende;
-
-    private Comprador persona;
     public PanelPrincipal() {
         exp = new PanelExpendedor();
-        com = new PanelComprador();
-        expende= new Expendedor(5,800,400);
     }
 
     public void paint () {
-      /*  if(exp.getCual()==0) {
-            exp.paint();
-        }
-        cual=exp.getCual();
-        System.out.println(cual);
-        if(cual!=0){
-           com.paint();
-        }*/
-
         exp.paint();
-        com.paint();
-        persona=new Comprador(com.getMoneda(),exp.getCual(),expende); // ESTA PARTE NO ME ESTA FUNCIONANDO porque se esta haciendo antes qq lo de paint
     }
+
 }
 class PanelComprador extends JFrame{
     private JButton boton1,boton2,boton3,boton4;
@@ -36,7 +20,8 @@ class PanelComprador extends JFrame{
     private JLabel label1,label2;
     private Moneda m;
 
-
+    public Expendedor expende;
+    public Comprador persona;
 
     public PanelComprador(){
         setSize(600, 800);
@@ -47,6 +32,7 @@ class PanelComprador extends JFrame{
         setTitle("Comprador");
 
         m=null;
+        expende= new Expendedor(5,800,400);
 
         panel1 = new JPanel();
         panel1.setBounds(130, 338, 70, 70);
@@ -74,8 +60,6 @@ class PanelComprador extends JFrame{
         label1.setBounds(100, 270, 600, 20);
         Font font = new Font("Helvica", Font.BOLD, 14);
         label1.setFont(font);
-
-
 
     }
 
@@ -137,14 +121,13 @@ class PanelComprador extends JFrame{
         boton1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 m = new Moneda100();
-                System.out.println(m.getValor());
+                persona= new Comprador(m,PanelExpendedor.getCual(),expende);
             }
         });
 
         boton2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 m = new Moneda500();
-                System.out.println(m.getValor());
             }
         });
 
@@ -158,7 +141,6 @@ class PanelComprador extends JFrame{
         boton4.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 m = new Moneda1500();
-                System.out.println(m.getValor());
             }
         });
 
@@ -174,9 +156,9 @@ class PanelExpendedor extends JFrame {
     private JPanel panel1, panel2, panel3, panel4, panel5;
     private Botonredondo boton1, boton2, boton3, boton4, boton5;
     private JLabel apretar1, apretar2, apretar3;
-    private int cual;
-
-    public PanelExpendedor() {
+    private static int cual;
+    public PanelComprador panelcomprador;
+        public PanelExpendedor() {
         setSize(800, 800);
         setLocation(0, 0);
         setResizable(false);
@@ -184,7 +166,9 @@ class PanelExpendedor extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Expendedor");
 
-        cual=0;
+
+        cual = 0;
+        panelcomprador= new PanelComprador();
 
         panel1 = new JPanel();
         panel1.setBounds(490, 285, 30, 35);
@@ -253,7 +237,7 @@ class PanelExpendedor extends JFrame {
 
     }
 
-    public void paint() {
+    public  void paint() {
 
         ImageIcon imagenicon3 = new ImageIcon("C:/Users/user/Downloads/PROGRA2/tarea2progra/src/imagenes/Imagen1.jpg");
         Image imagen3 = imagenicon3.getImage();
@@ -292,57 +276,64 @@ class PanelExpendedor extends JFrame {
         add(apretar2);
         add(apretar3);
 
-        boton1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                apretar1.setVisible(false); // Ocultar el mensaje
-                apretar2.setVisible(false);
-                apretar3.setVisible(false);
-                cual = 1;
-                System.out.println(cual);
-            }
-        });
+        if (cual==0) {
+            boton1.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    apretar1.setVisible(false); // Ocultar el mensaje
+                    apretar2.setVisible(false);
+                    apretar3.setVisible(false);
+                    cual = 1;
+                    System.out.println(cual);
+                    panelcomprador.paint();
+                }
+            });
 
-        boton2.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                apretar1.setVisible(false); // Ocultar el mensaje
-                apretar2.setVisible(false);
-                apretar3.setVisible(false);
-                cual = 2;
-            }
-        });
+            boton2.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    apretar1.setVisible(false); // Ocultar el mensaje
+                    apretar2.setVisible(false);
+                    apretar3.setVisible(false);
+                    cual = 2;
+                    panelcomprador.paint();
+                }
+            });
 
-        boton3.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                apretar1.setVisible(false); // Ocultar el mensaje
-                apretar2.setVisible(false);
-                apretar3.setVisible(false);
-                cual = 3;
-            }
-        });
+            boton3.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    apretar1.setVisible(false); // Ocultar el mensaje
+                    apretar2.setVisible(false);
+                    apretar3.setVisible(false);
+                    cual = 3;
+                    panelcomprador.paint();
+                }
+            });
 
-        boton4.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                apretar1.setVisible(false); // Ocultar el mensaje
-                apretar2.setVisible(false);
-                apretar3.setVisible(false);
-                cual = 4;
-            }
-        });
+            boton4.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    apretar1.setVisible(false); // Ocultar el mensaje
+                    apretar2.setVisible(false);
+                    apretar3.setVisible(false);
+                    cual = 4;
+                    panelcomprador.paint();
+                }
+            });
 
-        boton5.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                apretar1.setVisible(false); // Ocultar el mensaje
-                apretar2.setVisible(false);
-                apretar3.setVisible(false);
-                cual = 5;
-            }
-        });
+            boton5.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    apretar1.setVisible(false); // Ocultar el mensaje
+                    apretar2.setVisible(false);
+                    apretar3.setVisible(false);
+                    cual = 5;
+                    panelcomprador.paint();
+                }
+            });
+        }
 
         setVisible(true);
-
-
     }
-    public int getCual() {
+
+    public static int getCual() {
         return cual;
     }
+
 }
