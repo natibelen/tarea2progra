@@ -122,12 +122,43 @@ class PanelComprador extends JFrame{
                 m = new Moneda100();
                 persona = new Comprador(m, PanelExpendedor.getCual(), expende);
                 System.out.println(persona.queSacaste()+", "+persona.cuantoVuelto());
-                ImageIcon imagenboton21 = new ImageIcon("C:/Users/user/Downloads/PROGRA2/tarea2progra/src/imagenes/500.png");
+                ImageIcon imagenboton21 = new ImageIcon("C:/Users/user/Downloads/PROGRA2/tarea2progra/src/imagenes/100.jpg");
                 Image imagenbot21 = imagenboton21.getImage();
                 Image nuevoboton21 = imagenbot21.getScaledInstance(70, 70, Image.SCALE_SMOOTH);
                 JLabel img = new JLabel(new ImageIcon(nuevoboton21));
                 img.setBounds(boton1.getBounds());
                 add(img);
+
+                Timer timer = new Timer(2, new ActionListener() {
+                    int x = 130; // La posición x de la imagen
+                    int y = 338; // La posición y de la imagen
+                    int destinoX = 600; // La posición x final
+                    int destinoY = 400; // La posición y final
+
+                    public void actionPerformed(ActionEvent e) {
+                        // Calcular la nueva posición de la imagen
+                        if (x < destinoX) {
+                            x++;
+                        }
+                        if (y < destinoY) {
+                            y++;
+                        }
+
+                        // Mover la imagen
+                        img.setLocation(x, y);
+
+                        // Si llegamos a la posición final, detener el Timer y eliminar la imagen
+                        if (x == destinoX && y == destinoY) {
+                            ((Timer)e.getSource()).stop();
+                            remove(img);
+                            repaint();
+                        }
+                    }
+                });
+
+                // Iniciar el Timer
+                timer.start();
+
 
             });
 
@@ -135,6 +166,43 @@ class PanelComprador extends JFrame{
                 m = new Moneda500();
                 persona = new Comprador(m, PanelExpendedor.getCual(), expende);
                 System.out.println(persona.queSacaste()+", "+persona.cuantoVuelto());
+                ImageIcon imagenboton21 = new ImageIcon("C:/Users/user/Downloads/PROGRA2/tarea2progra/src/imagenes/500.png");
+                Image imagenbot21 = imagenboton21.getImage();
+                Image nuevoboton21 = imagenbot21.getScaledInstance(70, 70, Image.SCALE_SMOOTH);
+                JLabel img = new JLabel(new ImageIcon(nuevoboton21));
+                img.setBounds(boton1.getBounds());
+                add(img);
+
+                Timer timer = new Timer(2, new ActionListener() {
+                    int x = 210; // La posición x de la imagen
+                    int y = 338; // La posición y de la imagen
+                    int destinoX = 600; // La posición x final
+                    int destinoY = 400; // La posición y final
+
+                    public void actionPerformed(ActionEvent e) {
+                        // Calcular la nueva posición de la imagen
+                        if (x < destinoX) {
+                            x++;
+                        }
+                        if (y < destinoY) {
+                            y++;
+                        }
+
+                        // Mover la imagen
+                        img.setLocation(x, y);
+
+                        // Si llegamos a la posición final, detener el Timer y eliminar la imagen
+                        if (x == destinoX && y == destinoY) {
+                            ((Timer)e.getSource()).stop();
+                            remove(img);
+                            repaint();
+                        }
+                    }
+                });
+
+                // Iniciar el Timer
+                timer.start();
+
             });
 
             boton3.addActionListener(i -> {
@@ -142,12 +210,86 @@ class PanelComprador extends JFrame{
                 //System.out.println(m.getValor());
                 persona = new Comprador(m, PanelExpendedor.getCual(), expende);
                 System.out.println(persona.queSacaste()+", "+persona.cuantoVuelto());
+                ImageIcon imagenboton21 = new ImageIcon("C:/Users/user/Downloads/PROGRA2/tarea2progra/src/imagenes/1000.jpg");
+                Image imagenbot21 = imagenboton21.getImage();
+                Image nuevoboton21 = imagenbot21.getScaledInstance(70, 70, Image.SCALE_SMOOTH);
+                JLabel img = new JLabel(new ImageIcon(nuevoboton21));
+                img.setBounds(boton1.getBounds());
+                add(img);
+
+                Timer timer = new Timer(2, new ActionListener() {
+                    int x = 290; // La posición x de la imagen
+                    int y = 338; // La posición y de la imagen
+                    int destinoX = 600; // La posición x final
+                    int destinoY = 400; // La posición y final
+
+                    public void actionPerformed(ActionEvent e) {
+                        // Calcular la nueva posición de la imagen
+                        if (x < destinoX) {
+                            x++;
+                        }
+                        if (y < destinoY) {
+                            y++;
+                        }
+
+                        // Mover la imagen
+                        img.setLocation(x, y);
+
+                        // Si llegamos a la posición final, detener el Timer y eliminar la imagen
+                        if (x == destinoX && y == destinoY) {
+                            ((Timer)e.getSource()).stop();
+                            remove(img);
+                            repaint();
+                        }
+                    }
+                });
+
+                // Iniciar el Timer
+                timer.start();
+
             });
 
             boton4.addActionListener(i -> {
                 m = new Moneda1500();
                 persona = new Comprador(m, PanelExpendedor.getCual(), expende);
                 System.out.println(persona.queSacaste()+", "+persona.cuantoVuelto());
+                ImageIcon imagenboton21 = new ImageIcon("C:/Users/user/Downloads/PROGRA2/tarea2progra/src/imagenes/1500.jpg");
+                Image imagenbot21 = imagenboton21.getImage();
+                Image nuevoboton21 = imagenbot21.getScaledInstance(70, 70, Image.SCALE_SMOOTH);
+                JLabel img = new JLabel(new ImageIcon(nuevoboton21));
+                img.setBounds(boton1.getBounds());
+                add(img);
+
+                Timer timer = new Timer(2, new ActionListener() {
+                    int x = 370; // La posición x de la imagen
+                    int y = 338; // La posición y de la imagen
+                    int destinoX = 600; // La posición x final
+                    int destinoY = 400; // La posición y final
+
+                    public void actionPerformed(ActionEvent e) {
+                        // Calcular la nueva posición de la imagen
+                        if (x < destinoX) {
+                            x++;
+                        }
+                        if (y < destinoY) {
+                            y++;
+                        }
+
+                        // Mover la imagen
+                        img.setLocation(x, y);
+
+                        // Si llegamos a la posición final, detener el Timer y eliminar la imagen
+                        if (x == destinoX && y == destinoY) {
+                            ((Timer)e.getSource()).stop();
+                            remove(img);
+                            repaint();
+                        }
+                    }
+                });
+
+                // Iniciar el Timer
+                timer.start();
+
             });
             //persona.getVuelto() el vuelto que hay que devolverle a persona
             //persona.queSacaste()
