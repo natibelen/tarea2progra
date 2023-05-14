@@ -13,16 +13,18 @@ public class PanelPrincipal extends JFrame {
 
         exp.paint();
     }
-    public PanelExpendedor panelito(){
-        return exp;
-    }
-
 }
 class PanelComprador extends JFrame{
     private JButton boton1,boton2,boton3,boton4;
     private JPanel panel1,panel2,panel3,panel4;
     private JLabel label1,label2;
     private Moneda m;
+
+    public int vuelto;
+
+    public Moneda moneda;
+
+    public String quesacaste;
     public Expendedor expende;
     public Comprador persona;
 
@@ -165,7 +167,13 @@ class PanelComprador extends JFrame{
                 PanelExpendedor panelito=new PanelExpendedor();
                 panelito.operador=1;
                 panelito.cual=PanelExpendedor.getCual();
+                panelito.vuelto=persona.cuantoVuelto();
+                panelito.quesacaste=persona.queSacaste();
+                panelito.producto=PanelExpendedor.getCual();
+                panelito.moneda=m.getValor();
                 panelito.paint();
+
+
             });
 
             boton2.addActionListener(i -> {
@@ -211,6 +219,10 @@ class PanelComprador extends JFrame{
                 PanelExpendedor panelito=new PanelExpendedor();
                 panelito.operador=2;
                 panelito.cual=PanelExpendedor.getCual();
+                panelito.vuelto=persona.cuantoVuelto();
+                panelito.quesacaste=persona.queSacaste();
+                panelito.producto=PanelExpendedor.getCual();
+                panelito.moneda=m.getValor();
                 panelito.paint();
 
             });
@@ -259,6 +271,10 @@ class PanelComprador extends JFrame{
                 PanelExpendedor panelito=new PanelExpendedor();
                 panelito.operador=3;
                 panelito.cual=PanelExpendedor.getCual();
+                panelito.vuelto=persona.cuantoVuelto();
+                panelito.quesacaste=persona.queSacaste();
+                panelito.producto=PanelExpendedor.getCual();
+                panelito.moneda=m.getValor();
                 panelito.paint();
 
             });
@@ -306,8 +322,11 @@ class PanelComprador extends JFrame{
                 PanelExpendedor panelito=new PanelExpendedor();
                 panelito.operador=4;
                 panelito.cual=PanelExpendedor.getCual();
+                panelito.vuelto=persona.cuantoVuelto();
+                panelito.quesacaste=persona.queSacaste();
+                panelito.producto=PanelExpendedor.getCual();
+                panelito.moneda=m.getValor();
                 panelito.paint();
-
             });
             //persona.getVuelto() el vuelto que hay que devolverle a persona
             //persona.queSacaste()
@@ -328,8 +347,12 @@ class PanelExpendedor extends JFrame {
     private JLabel apretar1, apretar2, apretar3;
     public static int cual=0;
     public int operador=0;
-    public PanelComprador panelcomprador;
-    public PanelExpendedor() {
+    public int vuelto;
+    public int producto;
+    public String quesacaste;
+
+    public int moneda;
+        public PanelExpendedor() {
         setSize(800, 800);
         setLocation(0, 0);
         setResizable(false);
@@ -393,9 +416,6 @@ class PanelExpendedor extends JFrame {
     }
 
     public  void paint() {
-        if(operador==0) {
-            panelcomprador = new PanelComprador();
-        }
 
         ImageIcon imagenicon3 = new ImageIcon("C:/Users/user/Downloads/PROGRA2/tarea2progra/src/imagenes/Imagen1.jpg");
         Image imagen3 = imagenicon3.getImage();
@@ -462,6 +482,8 @@ class PanelExpendedor extends JFrame {
         }
 
         if (operador==0) {
+            PanelComprador panelcomprador= new PanelComprador();
+
             boton1.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     apretar1.setVisible(false); // Ocultar el mensaje
@@ -661,7 +683,7 @@ class PanelExpendedor extends JFrame {
                 Timer time= new Timer(4000,new ActionListener(){
                     public void actionPerformed(ActionEvent e) {
                         imagen.setVisible(true);
-                        Timer temporizador = new Timer(1, new ActionListener() {
+                        Timer temporizador = new Timer(5, new ActionListener() {
                             int x = 70; // La posición x de la imagen
                             int y = 70; // La posición y de la imagen
                             int destinoX = 520; // La posición x final
@@ -693,13 +715,240 @@ class PanelExpendedor extends JFrame {
                 time.start();
 
             }
+            System.out.println(vuelto);
+
+            if(vuelto>0 && quesacaste!=null && vuelto!=100){
+                int i=0;
+                while(vuelto>0){
+                    ImageIcon imagenv = new ImageIcon("C:/Users/user/Downloads/PROGRA2/tarea2progra/src/imagenes/100.jpg");
+                    Image imagenbot1 = imagenv.getImage();
+                    Image imagen100 = imagenbot1.getScaledInstance(70, 70, Image.SCALE_SMOOTH);
+                    JLabel vueltito = new JLabel(new ImageIcon(imagen100));
+                    vueltito.setVisible(false);
+                    vueltito.setBounds(450+i, 500, 70, 70);
+                    add(vueltito);
+                    int finalI = i;
+                    Timer time= new Timer(14000,new ActionListener(){
+                        public void actionPerformed(ActionEvent e) {
+                            vueltito.setVisible(true);
+                            Timer temporizador = new Timer(15, new ActionListener() {
+                                int x = 450+ finalI; // La posición x de la imagen
+                                int y = 500; // La posición y de la imagen
+                                int destinoX = 500+ finalI; // La posición x final
+                                int destinoY = 800; // La posición y final
+
+                                public void actionPerformed(ActionEvent e) {
+                                    if (x < destinoX) {
+                                        x++;
+                                    }
+                                    if (y < destinoY) {
+                                        y++;
+                                    }
+
+                                        // Mover la imagen
+                                    vueltito.setLocation(x, y);
+                                        // Si llegamos a la posición final, detener el Timer y eliminar la imagen
+                                    if (x == destinoX && y == destinoY) {
+                                        ((Timer) e.getSource()).stop();
+                                        remove(vueltito);
+                                        repaint();
+                                    }
+                                }
+                            });
+                                // Solo se ejecutará una vez
+                            temporizador.start();
+                        }
+                    });
+                    time.setRepeats(false); // Solo se ejecutará una vez
+                    time.start();
+
+                    vuelto=vuelto-100;
+                    i=i+40;
+                    System.out.println(vuelto);
+                }
+            }
+
+            else if(vuelto>0 && quesacaste==null && vuelto!=100){
+                Moneda m1= new Moneda500();
+                Moneda m2= new Moneda1000();
+                Moneda m3= new Moneda1500();
+                if(moneda==m1.getValor()){
+                    ImageIcon imagenv = new ImageIcon("C:/Users/user/Downloads/PROGRA2/tarea2progra/src/imagenes/500.png");
+                    Image imagenbot1 = imagenv.getImage();
+                    Image imagen100 = imagenbot1.getScaledInstance(70, 70, Image.SCALE_SMOOTH);
+                    JLabel vueltito = new JLabel(new ImageIcon(imagen100));
+                    vueltito.setVisible(false);
+                    vueltito.setBounds(500,500,70,70);
+                    add(vueltito);
+                    Timer time= new Timer(14000,new ActionListener(){
+                        public void actionPerformed(ActionEvent e) {
+                            vueltito.setVisible(true);
+                            Timer temporizador = new Timer(1, new ActionListener() {
+                                int x = 500; // La posición x de la imagen
+                                int y = 500; // La posición y de la imagen
+                                int destinoX = 500; // La posición x final
+                                int destinoY = 800; // La posición y final
+
+                                public void actionPerformed(ActionEvent e) {
+                                    if (x < destinoX) {
+                                        x++;
+                                    }
+                                    if (y < destinoY) {
+                                        y++;
+                                    }
+
+                                    // Mover la imagen
+                                    vueltito.setLocation(x, y);
+                                    // Si llegamos a la posición final, detener el Timer y eliminar la imagen
+                                    if (x == destinoX && y == destinoY) {
+                                        ((Timer) e.getSource()).stop();
+                                        remove(vueltito);
+                                        repaint();
+                                    }
+                                }
+                            });
+                            // Solo se ejecutará una vez
+                            temporizador.start();
+                        }
+                    });
+                    time.setRepeats(false); // Solo se ejecutará una vez
+                    time.start();
+                }
+                else if(moneda==m2.getValor()){
+                    ImageIcon imagenv = new ImageIcon("C:/Users/user/Downloads/PROGRA2/tarea2progra/src/imagenes/1000.jpg");
+                    Image imagenbot1 = imagenv.getImage();
+                    Image imagen100 = imagenbot1.getScaledInstance(70, 70, Image.SCALE_SMOOTH);
+                    JLabel vueltito = new JLabel(new ImageIcon(imagen100));
+                    vueltito.setVisible(false);
+                    vueltito.setBounds(500,500,70,70);
+                    add(vueltito);
+                    Timer time= new Timer(14000,new ActionListener(){
+                        public void actionPerformed(ActionEvent e) {
+                            vueltito.setVisible(true);
+                            Timer temporizador = new Timer(1, new ActionListener() {
+                                int x = 500; // La posición x de la imagen
+                                int y = 500; // La posición y de la imagen
+                                int destinoX = 500; // La posición x final
+                                int destinoY = 800; // La posición y final
+
+                                public void actionPerformed(ActionEvent e) {
+                                    if (x < destinoX) {
+                                        x++;
+                                    }
+                                    if (y < destinoY) {
+                                        y++;
+                                    }
+
+                                    // Mover la imagen
+                                    vueltito.setLocation(x, y);
+                                    // Si llegamos a la posición final, detener el Timer y eliminar la imagen
+                                    if (x == destinoX && y == destinoY) {
+                                        ((Timer) e.getSource()).stop();
+                                        remove(vueltito);
+                                        repaint();
+                                    }
+                                }
+                            });
+                            // Solo se ejecutará una vez
+                            temporizador.start();
+                        }
+                    });
+                    time.setRepeats(false); // Solo se ejecutará una vez
+                    time.start();
+                }
+                else if(moneda==m3.getValor()){
+                    ImageIcon imagenv = new ImageIcon("C:/Users/user/Downloads/PROGRA2/tarea2progra/src/imagenes/1500.jpg");
+                    Image imagenbot1 = imagenv.getImage();
+                    Image imagen100 = imagenbot1.getScaledInstance(70, 70, Image.SCALE_SMOOTH);
+                    JLabel vueltito = new JLabel(new ImageIcon(imagen100));
+                    vueltito.setVisible(false);
+                    vueltito.setBounds(500,500,70,70);
+                    add(vueltito);
+                    Timer time= new Timer(14000,new ActionListener(){
+                        public void actionPerformed(ActionEvent e) {
+                            vueltito.setVisible(true);
+                            Timer temporizador = new Timer(1, new ActionListener() {
+                                int x = 500; // La posición x de la imagen
+                                int y = 500; // La posición y de la imagen
+                                int destinoX = 500; // La posición x final
+                                int destinoY = 800; // La posición y final
+
+                                public void actionPerformed(ActionEvent e) {
+                                    if (x < destinoX) {
+                                        x++;
+                                    }
+                                    if (y < destinoY) {
+                                        y++;
+                                    }
+
+                                    // Mover la imagen
+                                    vueltito.setLocation(x, y);
+                                    // Si llegamos a la posición final, detener el Timer y eliminar la imagen
+                                    if (x == destinoX && y == destinoY) {
+                                        ((Timer) e.getSource()).stop();
+                                        remove(vueltito);
+                                        repaint();
+                                    }
+                                }
+                            });
+                            // Solo se ejecutará una vez
+                            temporizador.start();
+                        }
+                    });
+                    time.setRepeats(false); // Solo se ejecutará una vez
+                    time.start();
+                }
+            }
+
+            else if(vuelto==100){
+                System.out.println("holii");
+                ImageIcon imagenv = new ImageIcon("C:/Users/user/Downloads/PROGRA2/tarea2progra/src/imagenes/100.jpg");
+                Image imagenbot1 = imagenv.getImage();
+                Image imagen100 = imagenbot1.getScaledInstance(70, 70, Image.SCALE_SMOOTH);
+                JLabel vueltito = new JLabel(new ImageIcon(imagen100));
+                vueltito.setVisible(false);
+                vueltito.setBounds(500,500,70,70);
+                add(vueltito);
+                Timer time= new Timer(16000,new ActionListener(){
+                    public void actionPerformed(ActionEvent e) {
+                        vueltito.setVisible(true);
+                        Timer temporizador = new Timer(1, new ActionListener() {
+                            int x = 500; // La posición x de la imagen
+                            int y = 500; // La posición y de la imagen
+                            int destinoX = 500; // La posición x final
+                            int destinoY = 800; // La posición y final
+
+                            public void actionPerformed(ActionEvent e) {
+                                if (x < destinoX) {
+                                    x++;
+                                }
+                                if (y < destinoY) {
+                                    y++;
+                                }
+
+                                // Mover la imagen
+                                vueltito.setLocation(x, y);
+                                // Si llegamos a la posición final, detener el Timer y eliminar la imagen
+                                if (x == destinoX && y == destinoY) {
+                                    ((Timer) e.getSource()).stop();
+                                    remove(vueltito);
+                                    repaint();
+                                }
+                            }
+                        });
+                        // Solo se ejecutará una vez
+                        temporizador.start();
+                    }
+                });
+                time.setRepeats(false); // Solo se ejecutará una vez
+                time.start();
+            }
         }
-
-
     }
 
     public static int getCual() {
         return cual;
     }
+
 
 }
