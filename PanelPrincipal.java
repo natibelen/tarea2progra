@@ -10,21 +10,14 @@ public class PanelPrincipal extends JFrame {
         exp = new PanelExpendedor();
     }
     public void paint () {
-
         exp.paint();
     }
 }
 class PanelComprador extends JFrame{
     private JButton boton1,boton2,boton3,boton4;
     private JPanel panel1,panel2,panel3,panel4;
-    private JLabel label1,label2;
+    private JLabel label1,label2,label3,label4,label5,label6; //cambio
     private Moneda m;
-
-    public int vuelto;
-
-    public Moneda moneda;
-
-    public String quesacaste;
     public Expendedor expende;
     public Comprador persona;
 
@@ -37,7 +30,7 @@ class PanelComprador extends JFrame{
         setTitle("Comprador");
 
         m=null;
-        expende= new Expendedor(5,800,400);
+        expende= new Expendedor(100,800,400);
 
         panel1 = new JPanel();
         panel1.setBounds(130, 338, 70, 70);
@@ -56,16 +49,34 @@ class PanelComprador extends JFrame{
         panel4.setOpaque(false);
 
         label2 = new JLabel("Esta es tu billetera...");
-        label2.setBounds(100, 250, 600, 20);
+        label2.setBounds(100, 420, 600, 20);
         Font font2 = new Font("Helvica", Font.BOLD, 14);
         label2.setFont(font2);
 
-
         label1 = new JLabel("Haz click sobre una moneda para pagar tu producto...");
-        label1.setBounds(100, 270, 600, 20);
+        label1.setBounds(100, 440, 600, 20);
         Font font = new Font("Helvica", Font.BOLD, 14);
         label1.setFont(font);
 
+        label3 = new JLabel("Si quieres sacar un producto nuevamente puedes esperar"); //CAMBIO
+        label3.setBounds(100, 470, 600, 20);
+        Font font3 = new Font("Helvica", Font.BOLD, 14);
+        label3.setFont(font3);
+
+        label4 = new JLabel("a que aparezca por segunda vez el mensaje en el expendedor...");
+        label4.setBounds(100, 490, 600, 20);
+        Font font4 = new Font("Helvica", Font.BOLD, 14);
+        label4.setFont(font4);
+
+        label5 = new JLabel("Si ya no quieres sacar productos tan solo");
+        label5.setBounds(100, 520, 600, 20);
+        Font font5 = new Font("Helvica", Font.BOLD, 14);
+        label5.setFont(font5);
+
+        label6 = new JLabel("cierra alguna de las ventanas...");
+        label6.setBounds(100, 540, 600, 20);
+        Font font6 = new Font("Helvica", Font.BOLD, 14);
+        label6.setFont(font6);
     }
 
     public void paint() {
@@ -122,6 +133,10 @@ class PanelComprador extends JFrame{
         add(panel4);
         add(label1);
         add(label2);
+        add(label3);
+        add(label4);
+        add(label5);
+        add(label6);
 
         if(m==null) {
             boton1.addActionListener(i -> {
@@ -177,7 +192,17 @@ class PanelComprador extends JFrame{
                 panelito.quesacaste=persona.queSacaste();
                 panelito.producto=PanelExpendedor.getCual();
                 panelito.moneda=m.getValor();
+                panelito.expendedor=expende;
+                panelito.persona=persona;
                 panelito.paint();
+                Timer timer1 = new Timer(12000, new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        setVisible(false);
+                    }
+                });
+                timer1.setRepeats(false); // Solo se ejecutará una vez
+                timer1.start();//CAMBIO
 
 
             });
@@ -236,12 +261,20 @@ class PanelComprador extends JFrame{
                 panelito.producto=PanelExpendedor.getCual();
                 panelito.moneda=m.getValor();
                 panelito.paint();
+                Timer timer1 = new Timer(25000, new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        setVisible(false);
+                    }
+                });
+                timer1.setRepeats(false); // Solo se ejecutará una vez
+                timer1.start();//CAMBIO
+
 
             });
 
             boton3.addActionListener(i -> {
                 m = new Moneda1000();
-                //System.out.println(m.getValor());
                 persona = new Comprador(m, PanelExpendedor.getCual(), expende);
                 System.out.println(persona.queSacaste()+", "+persona.cuantoVuelto());
                 ImageIcon imagenboton21 = new ImageIcon("C:/Users/user/Downloads/PROGRA2/tarea2progra/src/imagenes/1000.jpg");
@@ -294,6 +327,15 @@ class PanelComprador extends JFrame{
                 panelito.producto=PanelExpendedor.getCual();
                 panelito.moneda=m.getValor();
                 panelito.paint();
+                Timer timer1 = new Timer(25000, new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        setVisible(false);
+                    }
+                });
+                timer1.setRepeats(false); // Solo se ejecutará una vez
+                timer1.start();//CAMBIO
+
 
             });
 
@@ -351,6 +393,15 @@ class PanelComprador extends JFrame{
                 panelito.producto=PanelExpendedor.getCual();
                 panelito.moneda=m.getValor();
                 panelito.paint();
+                Timer timer1 = new Timer(25000, new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        setVisible(false);
+                    }
+                });
+                timer1.setRepeats(false); // Solo se ejecutará una vez
+                timer1.start();//CAMBIO
+
             });
             //persona.getVuelto() el vuelto que hay que devolverle a persona
             //persona.queSacaste()
@@ -365,12 +416,14 @@ class PanelComprador extends JFrame{
 class PanelExpendedor extends JFrame {
     private JPanel panel1, panel2, panel3, panel4, panel5;
     private Botonredondo boton1, boton2, boton3, boton4, boton5;
-    private JLabel apretar1, apretar2, apretar3;
+    private JLabel apretar1, apretar2, apretar3,label1,label2,label3,label4;
     public static int cual=0;
     public int operador=0;
     public int vuelto;
     public int producto;
     public String quesacaste;
+    public Comprador persona;
+    public Expendedor expendedor;
 
     public int moneda;
     public PanelExpendedor() {
@@ -471,7 +524,6 @@ class PanelExpendedor extends JFrame {
         add(panel3);
         add(panel4);
         add(panel5);
-        System.out.println(cual);
 
         setVisible(true);
 
@@ -511,8 +563,19 @@ class PanelExpendedor extends JFrame {
                     apretar2.setVisible(false);
                     apretar3.setVisible(false);
                     cual = 1;
-                    System.out.println(cual);
+                    if(expendedor!=null){
+                       panelcomprador.expende=expendedor;
+                    }//CAMBIO
                     panelcomprador.paint();
+
+                    Timer timer = new Timer(10000, new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            setVisible(false);
+                        }
+                    });
+                    timer.setRepeats(false); // Solo se ejecutará una vez
+                    timer.start(); //cCAMBIO
                 }
             });
 
@@ -522,7 +585,18 @@ class PanelExpendedor extends JFrame {
                     apretar2.setVisible(false);
                     apretar3.setVisible(false);
                     cual = 2;
+                    if(expendedor!=null){
+                        panelcomprador.expende=expendedor;
+                    }
                     panelcomprador.paint();
+                    Timer timer = new Timer(12000, new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            setVisible(false);
+                        }
+                    });
+                    timer.setRepeats(false); // Solo se ejecutará una vez
+                    timer.start();//CAMBIO
                 }
             });
 
@@ -532,7 +606,18 @@ class PanelExpendedor extends JFrame {
                     apretar2.setVisible(false);
                     apretar3.setVisible(false);
                     cual = 3;
+                    if(expendedor!=null){
+                        panelcomprador.expende=expendedor;
+                    }
                     panelcomprador.paint();
+                    Timer timer = new Timer(12000, new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            setVisible(false);
+                        }
+                    });
+                    timer.setRepeats(false); // Solo se ejecutará una vez
+                    timer.start();//CAMBIO
                 }
             });
 
@@ -542,7 +627,18 @@ class PanelExpendedor extends JFrame {
                     apretar2.setVisible(false);
                     apretar3.setVisible(false);
                     cual = 4;
+                    if(expendedor!=null){
+                        panelcomprador.expende=expendedor;
+                    }
                     panelcomprador.paint();
+                    Timer timer = new Timer(12000, new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            setVisible(false);
+                        }
+                    });
+                    timer.setRepeats(false); // Solo se ejecutará una vez
+                    timer.start();//CAMBIO
                 }
             });
 
@@ -552,11 +648,23 @@ class PanelExpendedor extends JFrame {
                     apretar2.setVisible(false);
                     apretar3.setVisible(false);
                     cual = 5;
+                    if(expendedor!=null){
+                        panelcomprador.expende=expendedor;
+                    }
                     panelcomprador.paint();
+                    Timer timer = new Timer(12000, new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            setVisible(false);
+                        }
+                    });
+                    timer.setRepeats(false); // Solo se ejecutará una vez
+                    timer.start();//CAMBIO
                 }
             });
         }
 
+////////////////////////////////////////////////////////////////////////////////////////////////
 
         else if (operador!=0){
             if(operador==1){
@@ -972,7 +1080,6 @@ class PanelExpendedor extends JFrame {
                     time1.start();
                 }
                 else if(cual==3){
-                    System.out.println("aqui");
                     ImageIcon imagenv = new ImageIcon("C:/Users/user/Downloads/PROGRA2/tarea2progra/src/imagenes/snicke2.png");
                     Image imagen1 = imagenv.getImage();
                     Image snickers1 = imagen1.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
@@ -1053,7 +1160,6 @@ class PanelExpendedor extends JFrame {
                     time1.start();
                 }
                 else if(cual==4){
-                    System.out.println("aqu");
                     ImageIcon imagenv = new ImageIcon("C:/Users/user/Downloads/PROGRA2/tarea2progra/src/imagenes/super8.png");
                     Image imagen1 = imagenv.getImage();
                     Image super1 = imagen1.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
@@ -1311,9 +1417,24 @@ class PanelExpendedor extends JFrame {
                     time.start();
                 }
             }
+
+            Timer timer = new Timer(26000, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    setVisible(false);//CAMBIO
+                    PanelExpendedor panelito2=new PanelExpendedor();
+                    panelito2.cual=0;
+                    panelito2.expendedor=expendedor;
+                    panelito2.persona=persona;
+                    panelito2.operador=0;
+                    panelito2.paint();
+                }
+            });
+            timer.setRepeats(false); // Solo se ejecutará una vez
+            timer.start();
+
         }
     }
-
     public static int getCual() {
         return cual;
     }
