@@ -1,1 +1,2 @@
-# tarea2progra
+# Camila Cortes Perez
+# Natalia Contreras Aliaga
